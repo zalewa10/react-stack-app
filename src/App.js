@@ -1,16 +1,16 @@
-// App.js
 import React, { useState, useEffect } from "react";
 import { Stack } from "./components/Stack";
-import { fetchExternalData } from "./parser";
+import { dataArray } from "./parser";
 
 function App() {
   const [stackData, setStackData] = useState([]);
 
   const fetchDataFromParser = async () => {
     try {
-      const parserData = await fetchExternalData();
-      const processedData = parseData(parserData);
-      setStackData([...stackData, processedData]);
+      const processedDataArray = dataArray.map((data, index) =>
+        parseData(data, index)
+      );
+      setStackData([...stackData, ...processedDataArray]);
     } catch (error) {
       console.error("Błąd podczas pobierania danych:", error);
     }
@@ -20,28 +20,28 @@ function App() {
     fetchDataFromParser();
   }, []);
 
-  const parseData = (data) => {
+  const parseData = (data, index) => {
     return {
-      id: stackData.length + 1,
+      id: stackData.length + index + 1,
       tableData: data.map((item) => createData(item)),
     };
   };
 
   const createData = (item) => {
     return {
-      name: item.name,
-      calories: item.calories,
-      fat: item.fat,
-      carbs: item.carbs,
-      protein: item.protein,
+      Name: item.name,
+      Calories: item.calories,
+      Fat: item.fat,
+      Carbs: item.carbs,
+      Protein: item.protein,
     };
   };
 
   return (
     <div className="App">
-      <h1>React Stack App</h1>
-      <h2>wizualizacja grafik</h2>
+      <h1> Dynamiczna wizualizacja tabel</h1>
       <Stack data={stackData} />
+      <h2>Wykonane przez K.Z</h2>
     </div>
   );
 }
