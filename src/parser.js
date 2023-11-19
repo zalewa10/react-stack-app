@@ -1,4 +1,3 @@
-// parser.js
 export const dataArray = [
   [
     {

@@ -18,7 +18,7 @@ function App() {
     };
 
     fetchDataFromParser();
-  }, []); // Empty dependency array to run once when component mounts
+  }, []);
 
   const parseData = (data, id) => {
     return {
