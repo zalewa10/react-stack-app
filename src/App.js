@@ -5,35 +5,25 @@ import { dataArray } from "./parser";
 function App() {
   const [stackData, setStackData] = useState([]);
 
-  const fetchDataFromParser = async () => {
-    try {
-      const processedDataArray = dataArray.map((data, index) =>
-        parseData(data, index)
-      );
-      setStackData([...stackData, ...processedDataArray]);
-    } catch (error) {
-      console.error("Błąd podczas pobierania danych:", error);
-    }
-  };
-
   useEffect(() => {
-    fetchDataFromParser();
-  }, []);
-
-  const parseData = (data, index) => {
-    return {
-      id: stackData.length + index + 1,
-      tableData: data.map((item) => createData(item)),
+    const fetchDataFromParser = async () => {
+      try {
+        const processedDataArray = dataArray.map((data, index) =>
+          parseData(data, index + 1)
+        );
+        setStackData((prevData) => [...prevData, ...processedDataArray]);
+      } catch (error) {
+        console.error("Błąd podczas pobierania danych:", error);
+      }
     };
-  };
 
-  const createData = (item) => {
+    fetchDataFromParser();
+  }, []); // Empty dependency array to run once when component mounts
+
+  const parseData = (data, id) => {
     return {
-      Name: item.name,
-      Calories: item.calories,
-      Fat: item.fat,
-      Carbs: item.carbs,
-      Protein: item.protein,
+      id,
+      tableData: data.map((item) => item),
     };
   };
 

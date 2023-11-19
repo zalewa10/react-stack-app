@@ -13,6 +13,11 @@ import {
 const Stack = ({ data }) => {
   console.log("Data in Stack:", data);
 
+  // Function to get unique columns from each data item
+  const getUniqueColumns = (item) => {
+    return Object.keys(item.tableData[0]);
+  };
+
   return (
     <div>
       {data.map((item) => (
@@ -22,7 +27,7 @@ const Stack = ({ data }) => {
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  {Object.keys(item.tableData[0]).map((column, index) => (
+                  {getUniqueColumns(item).map((column, index) => (
                     <TableCell key={index}>{column}</TableCell>
                   ))}
                 </TableRow>
@@ -33,8 +38,8 @@ const Stack = ({ data }) => {
                     key={rowIndex}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
-                    {Object.values(row).map((value, colIndex) => (
-                      <TableCell key={colIndex}>{value}</TableCell>
+                    {getUniqueColumns(item).map((column, colIndex) => (
+                      <TableCell key={colIndex}>{row[column]}</TableCell>
                     ))}
                   </TableRow>
                 ))}
