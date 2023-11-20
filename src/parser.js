@@ -14,11 +14,18 @@ export const dataArray = [
       Carbs: 37,
       Protein: 4.3,
     },
-    // ... other rows
   ],
   [
     { Product: "Apple", Price: 1.0, Quantity: 5 },
     { Product: "Banana", Price: 0.8, Quantity: 7 },
-    // ... other rows
+  ],
+  [
+    {
+      Uczeń: "Bartek",
+      Poziom: "A1",
+      Język: "Hiszpański",
+      czyZapłacone: "Nie",
+    },
+    { Uczeń: "Adam", Poziom: "B1", Język: "Portugalski", czyZapłacone: "Tak" },
   ],
 ];
